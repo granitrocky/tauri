@@ -1,0 +1,28 @@
+[package]
+authors = [ "Tauri Programme within The Commons Conservancy" ]
+categories = [ "gui", "web-programming" ]
+description = "Make tiny, secure apps for all desktop platforms with Tauri"
+edition = "2021"
+rust-version = "1.59"
+exclude = [ "/test", "/.scripts", "CHANGELOG.md", "/target" ]
+homepage = "https://tauri.app"
+license = "Apache-2.0 OR MIT"
+name = "tauri-dylib"
+readme = "README.md"
+repository = "https://github.com/tauri-apps/tauri"
+version = "1.2.3"
+
+[lib]
+crate-type = ["dylib"]
+
+[dependencies]
+tauri-core = { path = "../tauri-core" }
+
+
+[features]
+# by default Tauri runs in production mode
+# when `tauri dev` runs it is executed with `cargo run --no-default-features` if `devPath` is an URL
+default = [ "custom-protocol" ]
+# this feature is used for production builds where `devPath` points to the filesystem
+# DO NOT remove this
+custom-protocol = [ "tauri-core/custom-protocol" ]
