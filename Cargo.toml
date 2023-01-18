@@ -1,7 +1,22 @@
+[package]
+authors = [ "Tauri Programme within The Commons Conservancy" ]
+categories = [ "gui", "web-programming" ]
+description = "Make tiny, secure apps for all desktop platforms with Tauri"
+edition = "2021"
+rust-version = "1.59"
+exclude = [ "/test", "/.scripts", "CHANGELOG.md", "/target" ]
+homepage = "https://tauri.app"
+license = "Apache-2.0 OR MIT"
+name = "tauri"
+readme = "README.md"
+repository = "https://github.com/tauri-apps/tauri"
+version = "1.2.3"
+
 [workspace]
 members = [
   # core
-  "core/tauri",
+  "core/tauri-core",
+  "core/tauri-dylib",
   "core/tauri-runtime",
   "core/tauri-runtime-wry",
   "core/tauri-macros",
@@ -32,3 +47,31 @@ codegen-units = 1
 lto = true
 incremental = false
 opt-level = "s"
+
+[features]
+default = ["core"]
+dynamic = ["tauri-dylib"]
+
+core = ["tauri-core"]
+runtime = ["tauri-runtime"]
+runtime-wry = ["tauri-runtime-wry"]
+macros = ["tauri-macros"]
+utils = ["tauri-utils"]
+build = ["tauri-build"]
+codegen = ["tauri-codegen"]
+schema = ["tauri-schema"]
+restart = ["restart"]
+app-updater = ["app-updater"]
+
+[dependencies]
+tauri-core = { path = "core/tauri-core", version = "1.2.3", optional = true }
+tauri-dylib = { path = "core/tauri-dylib", version = "1.2.3", optional = true }
+tauri-runtime = { path = "core/tauri-runtime", version = "1.2.3", optional = true }
+tauri-runtime-wry = { path = "core/tauri-runtime-wry", version = "1.2.3", optional = true }
+tauri-macros = { path = "core/tauri-macros", version = "1.2.3", optional = true }
+tauri-utils = { path = "core/tauri-utils", version = "1.2.3", optional = true }
+tauri-build = { path = "core/tauri-build", version = "1.2.1", optional = true }
+tauri-codegen = { path = "core/tauri-codegen", version = "1.2.3", optional = true }
+tauri-schema = { path = "core/tauri-schema", version = "1.2.3", optional = true }
+# restart = { path = "core/tests/restart", version = "1.2.3", optional = true }
+# app-updater = { path = "core/tests/app-updater", version = "1.2.3", optional = true }
